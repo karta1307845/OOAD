@@ -34,9 +34,11 @@ public class CanvasListener implements MouseListener, MouseMotionListener {
 		this.canvas = canvas;
 		this.editor = editor;
 		robot = new Robot();
+
 		startConnectObject = null;
 		start = null;
 		tempLine = null;
+		tempRectangle = null;
 	}
 
 	@Override
@@ -113,6 +115,11 @@ public class CanvasListener implements MouseListener, MouseMotionListener {
 		switch (mode) {
 		case 0:
 			if (tempRectangle != null) {
+				editor.unSelectAllObjects();
+				BasicObject[] selectedObjects = tempRectangle.selectAllBasicObjects(editor.getSortedObject());
+				for (BasicObject i : selectedObjects) {
+					editor.selectObject(i);
+				}
 				editor.removeObject(tempRectangle);
 			}
 			start = null;
