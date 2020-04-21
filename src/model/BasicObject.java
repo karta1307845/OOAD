@@ -2,11 +2,8 @@ package model;
 
 import java.awt.Graphics;
 
-public abstract class BasicObject extends UML_Object {
+public abstract class BasicObject extends ShapeObject {
 	protected String name;
-	public Location[] position;
-	protected int width;
-	protected int height;
 	protected Location[] ports;
 	protected final int portSize = 5;
 
@@ -14,20 +11,12 @@ public abstract class BasicObject extends UML_Object {
 		this.name = name;
 		this.width = width;
 		this.height = height;
-		position = new Location[4];
 		calculatePosition(upperLeft);
-		ports = new Location[4];
 		createPorts();
 	}
 
-	private void calculatePosition(Location upperLeft) {
-		position[0] = upperLeft;
-		position[1] = upperLeft.move(width, 0);
-		position[2] = upperLeft.move(0, height);
-		position[3] = upperLeft.move(width, height);
-	}
-
 	private void createPorts() {
+		ports = new Location[4];
 		ports[0] = position[0].move(width / 2, 0);
 		ports[1] = position[0].move(0, height / 2);
 		ports[2] = position[0].move(width, height / 2);

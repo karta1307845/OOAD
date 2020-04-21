@@ -8,7 +8,6 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 import listener.CanvasListener;
-import model.Location;
 import model.UML_Editor;
 import model.UML_Object;
 

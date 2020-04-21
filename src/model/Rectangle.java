@@ -5,21 +5,14 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Rectangle extends UML_Object {
-	private Location[] position;
-	private int width;
-	private int height;
+public class Rectangle extends ShapeObject {
 
 	public Rectangle(Location start, Location end) {
-		int x = start.getX() < end.getX() ? start.getX() : end.getX();
-		int y = start.getY() < end.getY() ? start.getY() : end.getY();
 		width = Math.abs(start.getX() - end.getX());
 		height = Math.abs(start.getY() - end.getY());
-		position = new Location[4];
-		position[0] = new Location(x, y);
-		position[1] = new Location(x + width, y);
-		position[2] = new Location(x, y + height);
-		position[3] = new Location(x + width, y + height);
+		int x = start.getX() < end.getX() ? start.getX() : end.getX();
+		int y = start.getY() < end.getY() ? start.getY() : end.getY();
+		calculatePosition(new Location(x, y));
 	}
 
 	@Override

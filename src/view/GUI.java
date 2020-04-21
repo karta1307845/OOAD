@@ -21,7 +21,7 @@ public class GUI {
 		frame = new JFrame();
 		canvas = new Canvas(editor);
 		toolbar = new Toolbar(editor);
-		menu = new Menu();
+		menu = new Menu(editor);
 
 		initialize();
 	}

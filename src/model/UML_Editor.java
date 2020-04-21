@@ -59,4 +59,28 @@ public class UML_Editor {
 		}
 	}
 
+	public int countSelectedObjects() {
+		int count = 0;
+		for (UML_Object i : objects) {
+			if (i.selected) {
+				count++;
+			}
+		}
+		return count;
+	}
+
+	public UML_Object[] getSelectedObjects() {
+		List<UML_Object> list = new ArrayList<UML_Object>();
+
+		for (UML_Object i : objects) {
+			if (i.selected) {
+				list.add(i);
+			}
+		}
+
+		UML_Object[] result = new UML_Object[list.size()];
+		result = list.toArray(result);
+		return result;
+	}
+
 }
