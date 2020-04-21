@@ -50,12 +50,13 @@ public class UML_Editor {
 
 	public void selectObject(UML_Object obj) {
 		int index = objects.indexOf(obj);
-		objects.get(index).selected = true;
+		objects.get(index).setSelected(true);
+		;
 	}
 
 	public void unSelectAllObjects() {
 		for (UML_Object i : objects) {
-			i.selected = false;
+			i.setSelected(false);
 		}
 	}
 

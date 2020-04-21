@@ -5,34 +5,35 @@ import java.awt.Color;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 
-import listener.MenuListener;
+import listener.MenuBarListener;
 import model.UML_Editor;
 
-public class Menu {
+public class MenuBar {
 	private UML_Editor editor;
 	private JMenuBar bar;
 	private JMenu fileMenu;
 	private JMenu editMenu;
 
-	Menu(UML_Editor editor) {
+	MenuBar(UML_Editor editor, JPanel canvas) {
 		this.editor = editor;
 		bar = new JMenuBar();
 		fileMenu = new JMenu("File");
 		editMenu = new JMenu("Edit");
 
-		initialize();
+		initialize(canvas);
 	}
 
-	private void initialize() {
+	private void initialize(JPanel canvas) {
 		bar.setBackground(new Color(0xDCDCDC));
 
 		JMenuItem groupItem = new JMenuItem("Group");
-		groupItem.addActionListener(new MenuListener(editor, this));
+		groupItem.addActionListener(new MenuBarListener(editor, this, canvas));
 		groupItem.setActionCommand("Group");
 
 		JMenuItem unGroupItem = new JMenuItem("UnGroup");
-		unGroupItem.addActionListener(new MenuListener(editor, this));
+		unGroupItem.addActionListener(new MenuBarListener(editor, this, canvas));
 		unGroupItem.setActionCommand("UnGroup");
 
 		editMenu.add(groupItem);

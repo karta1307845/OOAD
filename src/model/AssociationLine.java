@@ -4,8 +4,8 @@ import java.awt.Graphics;
 
 public class AssociationLine extends ConnectionLine {
 
-	public AssociationLine(Location start, Location end) {
-		super(start, end, 10);
+	public AssociationLine(BasicObject startObj, Location start, BasicObject endObj, Location end) {
+		super(startObj, start, endObj, end, 10);
 	}
 
 	@Override

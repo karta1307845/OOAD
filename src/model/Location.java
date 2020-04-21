@@ -34,13 +34,6 @@ public class Location {
 		}
 	}
 
-	public double getDistance(Location point) {
-		double sumX = Math.pow(this.x - point.x, 2);
-		double sumY = Math.pow(this.y - point.y, 2);
-		double result = Math.sqrt(sumX + sumY);
-		return result;
-	}
-
 	public Location rotate(Location original, double theta) {
 		double sin = Math.sin(theta);
 		double cos;

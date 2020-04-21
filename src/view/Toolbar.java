@@ -10,16 +10,16 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import listener.ToolbarListener;
+import listener.ToolBarListener;
 import model.UML_Editor;
 
-public class Toolbar {
+public class ToolBar {
 	private UML_Editor editor;
 	private JPanel bar;
 	private List<JButton> buttonList;
 	private final int toolNum = 6;
 
-	Toolbar(UML_Editor editor) {
+	ToolBar(UML_Editor editor) {
 		this.editor = editor;
 		bar = new JPanel();
 		buttonList = new ArrayList<JButton>();
@@ -39,7 +39,7 @@ public class Toolbar {
 			button.setPreferredSize(new Dimension(50, 50));
 			button.setFocusPainted(false);
 			button.setContentAreaFilled(false);
-			button.addActionListener(new ToolbarListener(this));
+			button.addActionListener(new ToolBarListener(this));
 
 			buttonList.add(button);
 			bar.add(button);

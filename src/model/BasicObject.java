@@ -23,19 +23,8 @@ public abstract class BasicObject extends ShapeObject {
 		ports[3] = position[0].move(width / 2, height);
 	}
 
-	public boolean isClicked(Location clickPoint) {
-		int x = clickPoint.getX();
-		int y = clickPoint.getY();
-
-		if (x < position[0].getX() || x > position[1].getX()) {
-			return false;
-		}
-
-		if (y < position[0].getY() || y > position[2].getY()) {
-			return false;
-		}
-
-		return true;
+	public Location[] getPorts() {
+		return ports;
 	}
 
 	public Location getMappingPort(Location clickPoint) {
@@ -62,6 +51,14 @@ public abstract class BasicObject extends ShapeObject {
 			return ports[3];
 		} else {
 			return ports[1];
+		}
+	}
+
+	@Override
+	public void move(int deltaX, int deltaY) {
+		super.move(deltaX, deltaY);
+		for (int i = 0; i < 4; i++) {
+			ports[i] = ports[i].move(deltaX, deltaY);
 		}
 	}
 

@@ -5,8 +5,8 @@ import java.awt.Graphics;
 
 public class CompositionLine extends ConnectionLine {
 
-	public CompositionLine(Location start, Location end) {
-		super(start, end, 10);
+	public CompositionLine(BasicObject startObj, Location start, BasicObject endObj, Location end) {
+		super(startObj, start, endObj, end, 10);
 	}
 
 	@Override

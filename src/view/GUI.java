@@ -14,14 +14,14 @@ import model.UML_Editor;
 public class GUI {
 	private JFrame frame;
 	private JPanel canvas;
-	private Toolbar toolbar;
-	private Menu menu;
+	private ToolBar toolbar;
+	private MenuBar menu;
 
 	public GUI(UML_Editor editor) throws AWTException {
 		frame = new JFrame();
 		canvas = new Canvas(editor);
-		toolbar = new Toolbar(editor);
-		menu = new Menu(editor);
+		toolbar = new ToolBar(editor);
+		menu = new MenuBar(editor, canvas);
 
 		initialize();
 	}
@@ -47,5 +47,9 @@ public class GUI {
 		frame.setSize(900, 600);
 		frame.setVisible(true);
 
+	}
+
+	public JPanel getCanvas() {
+		return canvas;
 	}
 }

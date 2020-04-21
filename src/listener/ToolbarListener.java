@@ -4,13 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import model.UML_Editor;
-import view.Toolbar;
+import view.ToolBar;
 
-public class ToolbarListener implements ActionListener {
+public class ToolBarListener implements ActionListener {
 	private UML_Editor editor;
-	private Toolbar toolbar;
+	private ToolBar toolbar;
 
-	public ToolbarListener(Toolbar toolbar) {
+	public ToolBarListener(ToolBar toolbar) {
 		this.toolbar = toolbar;
 		editor = toolbar.getEditor();
 	}

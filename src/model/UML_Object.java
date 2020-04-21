@@ -23,6 +23,12 @@ public abstract class UML_Object implements Comparable<UML_Object> {
 		return depth;
 	}
 
+	public void setSelected(boolean selected) {
+		this.selected = selected;
+	}
+
+	public abstract void move(int deltaX, int deltaY);
+
 	public abstract void draw(Graphics g);
 
 	@Override
