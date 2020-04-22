@@ -31,7 +31,8 @@ public class Rectangle extends ShapeObject {
 		}
 
 		UML_Object[] result = new UML_Object[list.size()];
-		return list.toArray(result);
+		result = list.toArray(result);
+		return result;
 	}
 
 }

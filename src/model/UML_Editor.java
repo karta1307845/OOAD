@@ -32,9 +32,13 @@ public class UML_Editor {
 	}
 
 	public void addObject(UML_Object obj) {
-		obj.setDepth(currentDepth);
+		if (obj instanceof BasicObject || obj instanceof CompositeObject) {
+			obj.setDepth(currentDepth);
+			if (currentDepth < 99) {
+				currentDepth++;
+			}
+		}
 		objects.add(obj);
-		currentDepth++;
 	}
 
 	public UML_Object[] getSortedObject() {
@@ -51,7 +55,6 @@ public class UML_Editor {
 	public void selectObject(UML_Object obj) {
 		int index = objects.indexOf(obj);
 		objects.get(index).setSelected(true);
-		;
 	}
 
 	public void unSelectAllObjects() {
@@ -64,6 +67,26 @@ public class UML_Editor {
 		int count = 0;
 		for (UML_Object i : objects) {
 			if (i.selected) {
+				count++;
+			}
+		}
+		return count;
+	}
+
+	public int countSelectedBasicObjects() {
+		int count = 0;
+		for (UML_Object i : objects) {
+			if (i.selected && i instanceof BasicObject) {
+				count++;
+			}
+		}
+		return count;
+	}
+
+	public int countSelectedShapeObjects() {
+		int count = 0;
+		for (UML_Object i : objects) {
+			if (i.selected && i instanceof ShapeObject) {
 				count++;
 			}
 		}
@@ -84,4 +107,50 @@ public class UML_Editor {
 		return result;
 	}
 
+	public BasicObject[] getSelectedBasicObjects() {
+		UML_Object[] selctedObjects = getSelectedObjects();
+		List<BasicObject> list = new ArrayList<BasicObject>();
+
+		for (UML_Object i : selctedObjects) {
+			if (i instanceof BasicObject) {
+				list.add((BasicObject) i);
+			}
+		}
+
+		BasicObject[] result = new BasicObject[list.size()];
+		result = list.toArray(result);
+		return result;
+	}
+
+	public ShapeObject[] getSelectedShapeObjects() {
+		UML_Object[] selctedObjects = getSelectedObjects();
+		List<ShapeObject> list = new ArrayList<ShapeObject>();
+
+		for (UML_Object i : selctedObjects) {
+			if (i instanceof ShapeObject) {
+				list.add((ShapeObject) i);
+			}
+		}
+
+		ShapeObject[] result = new ShapeObject[list.size()];
+		result = list.toArray(result);
+		return result;
+	}
+
+	public ConnectionLine[] getConnectionLines(UML_Object obj) {
+		List<ConnectionLine> list = new ArrayList<ConnectionLine>();
+
+		for (UML_Object i : objects) {
+			if (i instanceof ConnectionLine) {
+				ConnectionLine line = (ConnectionLine) i;
+				if (obj.equals(line.getStartObj()) || obj.equals(line.getEndObj())) {
+					list.add(line);
+				}
+			}
+		}
+
+		ConnectionLine[] result = new ConnectionLine[list.size()];
+		result = list.toArray(result);
+		return result;
+	}
 }

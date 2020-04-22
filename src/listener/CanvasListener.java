@@ -10,11 +10,11 @@ import event.DrawLineEvent;
 import event.DrawRectangleEvent;
 import event.Event;
 import event.MoveEvent;
+import event.SelectEvent;
 import model.ClassObject;
 import model.Location;
 import model.ShapeObject;
 import model.UML_Editor;
-import model.UML_Object;
 import model.UseCaseObject;
 import view.Canvas;
 
@@ -23,13 +23,16 @@ public class CanvasListener implements MouseListener, MouseMotionListener {
 	private UML_Editor editor;
 	private Canvas canvas;
 
-	private Event action1;
-	private Event action2;
+	private Event select;
+	private Event multiSelect;
+	private Event action;
 
 	public CanvasListener(UML_Editor editor, Canvas canvas) throws AWTException {
 		this.canvas = canvas;
 		this.editor = editor;
 		robot = new Robot();
+		select = new SelectEvent(editor, robot);
+		multiSelect = new DrawRectangleEvent(editor, robot);
 	}
 
 	@Override
@@ -40,14 +43,10 @@ public class CanvasListener implements MouseListener, MouseMotionListener {
 
 		switch (mode) {
 		case 0:
-			ShapeObject obj;
-			obj = getClickedShapeObject(e);
-			editor.unSelectAllObjects();
-			if (obj != null) {
-				editor.selectObject(obj);
-			}
+			select.press(e);
 			break;
 		case 4:
+			ShapeObject obj;
 			obj = new ClassObject(new Location(x, y));
 			editor.addObject(obj);
 			break;
@@ -77,43 +76,37 @@ public class CanvasListener implements MouseListener, MouseMotionListener {
 
 		switch (mode) {
 		case 0:
-			action1 = new MoveEvent(editor, robot);
-			action1.press(e);
-
-			action2 = new DrawRectangleEvent(editor, robot);
-			action2.press(e);
-
+			action = new MoveEvent(editor, robot);
+			action.press(e);
+			multiSelect.press(e);
 			break;
 		case 1:
 		case 2:
 		case 3:
-			action1 = new DrawLineEvent(editor, robot, mode);
-			action1.press(e);
+			action = new DrawLineEvent(editor, robot, mode);
+			action.press(e);
 			break;
 		}
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		if (action1 != null) {
-			action1.release(e);
-			action1 = null;
+		if (action != null) {
+			action.release(e);
+			action = null;
 		}
-		if (action2 != null) {
-			action2.release(e);
-			action2 = null;
-		}
+		multiSelect.release(e);
+
 		canvas.repaint();
 	}
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		if (action1 != null) {
-			action1.drag(e);
+		if (action != null) {
+			action.drag(e);
 		}
-		if (action2 != null) {
-			action2.drag(e);
-		}
+		multiSelect.drag(e);
+
 		canvas.repaint();
 	}
 
@@ -121,19 +114,4 @@ public class CanvasListener implements MouseListener, MouseMotionListener {
 	public void mouseMoved(MouseEvent arg0) {
 
 	}
-
-	private ShapeObject getClickedShapeObject(MouseEvent e) {
-		UML_Object[] objects = editor.getSortedObject();
-		Location clickPoint = new Location(e.getX(), e.getY());
-
-		for (UML_Object i : objects) {
-			if (i instanceof ShapeObject) {
-				if (((ShapeObject) i).isClicked(clickPoint)) {
-					return (ShapeObject) i;
-				}
-			}
-		}
-		return null;
-	}
-
 }

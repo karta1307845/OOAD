@@ -1,5 +1,6 @@
 package model;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 public abstract class BasicObject extends ShapeObject {
@@ -25,6 +26,10 @@ public abstract class BasicObject extends ShapeObject {
 
 	public Location[] getPorts() {
 		return ports;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public Location getMappingPort(Location clickPoint) {
@@ -64,6 +69,7 @@ public abstract class BasicObject extends ShapeObject {
 
 	@Override
 	public void draw(Graphics g) {
+		g.setColor(Color.black);
 		if (selected) {
 			for (Location i : ports) {
 				int x = i.getX();

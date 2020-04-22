@@ -10,15 +10,13 @@ import javax.swing.JPanel;
 import listener.MenuBarListener;
 import model.UML_Editor;
 
-public class MenuBar {
+public class MenuBar extends JMenuBar {
 	private UML_Editor editor;
-	private JMenuBar bar;
 	private JMenu fileMenu;
 	private JMenu editMenu;
 
 	MenuBar(UML_Editor editor, JPanel canvas) {
 		this.editor = editor;
-		bar = new JMenuBar();
 		fileMenu = new JMenu("File");
 		editMenu = new JMenu("Edit");
 
@@ -26,7 +24,7 @@ public class MenuBar {
 	}
 
 	private void initialize(JPanel canvas) {
-		bar.setBackground(new Color(0xDCDCDC));
+		setBackground(new Color(0xDCDCDC));
 
 		JMenuItem groupItem = new JMenuItem("Group");
 		groupItem.addActionListener(new MenuBarListener(editor, this, canvas));
@@ -36,14 +34,16 @@ public class MenuBar {
 		unGroupItem.addActionListener(new MenuBarListener(editor, this, canvas));
 		unGroupItem.setActionCommand("UnGroup");
 
+		JMenuItem changeNameItem = new JMenuItem("Change Object Name");
+		changeNameItem.addActionListener(new MenuBarListener(editor, this, canvas));
+		changeNameItem.setActionCommand("ChangeName");
+
 		editMenu.add(groupItem);
 		editMenu.add(unGroupItem);
+		editMenu.addSeparator();
+		editMenu.add(changeNameItem);
 
-		bar.add(fileMenu);
-		bar.add(editMenu);
-	}
-
-	public JMenuBar getBar() {
-		return bar;
+		add(fileMenu);
+		add(editMenu);
 	}
 }

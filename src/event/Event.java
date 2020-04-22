@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 
 import model.BasicObject;
 import model.Location;
+import model.ShapeObject;
 import model.UML_Editor;
 import model.UML_Object;
 
@@ -37,11 +38,27 @@ public abstract class Event {
 			UML_Object[] objects = editor.getSortedObject();
 			Location point = new Location(e.getX(), e.getY());
 
-			for (UML_Object i : objects) {
-				if (i instanceof BasicObject) {
-					if (((BasicObject) i).isClicked(point)) {
-						return (BasicObject) i;
+			for (int i = objects.length - 1; i >= 0; i--) {
+				UML_Object obj = objects[i];
+				if (obj instanceof BasicObject) {
+					if (((BasicObject) obj).isClicked(point)) {
+						return (BasicObject) obj;
 					}
+				}
+			}
+		}
+		return null;
+	}
+
+	protected ShapeObject getClickedShapeObject(MouseEvent e) {
+		UML_Object[] objects = editor.getSortedObject();
+		Location point = new Location(e.getX(), e.getY());
+
+		for (int i = objects.length - 1; i >= 0; i--) {
+			UML_Object obj = objects[i];
+			if (obj instanceof ShapeObject) {
+				if (((ShapeObject) obj).isClicked(point)) {
+					return (ShapeObject) obj;
 				}
 			}
 		}

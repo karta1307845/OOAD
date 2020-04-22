@@ -40,7 +40,7 @@ public abstract class ShapeObject extends UML_Object {
 		for (Location point : position) {
 			int x = point.getX();
 			int y = point.getY();
-			if (x < upperLeft.getX() || x > bottomRight.getX() || y < upperLeft.getX() || y > bottomRight.getY()) {
+			if (x < upperLeft.getX() || x > bottomRight.getX() || y < upperLeft.getY() || y > bottomRight.getY()) {
 				return false;
 			}
 		}

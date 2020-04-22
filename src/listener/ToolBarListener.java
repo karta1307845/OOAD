@@ -10,9 +10,9 @@ public class ToolBarListener implements ActionListener {
 	private UML_Editor editor;
 	private ToolBar toolbar;
 
-	public ToolBarListener(ToolBar toolbar) {
+	public ToolBarListener(UML_Editor editor, ToolBar toolbar) {
 		this.toolbar = toolbar;
-		editor = toolbar.getEditor();
+		this.editor = editor;
 	}
 
 	@Override

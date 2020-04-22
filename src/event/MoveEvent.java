@@ -2,8 +2,6 @@ package event;
 
 import java.awt.Robot;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.List;
 
 import model.ConnectionLine;
 import model.Location;
@@ -44,7 +42,7 @@ public class MoveEvent extends Event {
 			start = start.move(deltaX, deltaY);
 			moveObj.move(deltaX, deltaY);
 
-			ConnectionLine[] lines = getConnectionLines();
+			ConnectionLine[] lines = editor.getConnectionLines(moveObj);
 			for (ConnectionLine i : lines) {
 				if (moveObj.equals(i.getStartObj())) {
 					i.moveStart(deltaX, deltaY);
@@ -66,24 +64,5 @@ public class MoveEvent extends Event {
 		super.reset();
 		moveObj = null;
 		start = null;
-	}
-
-	private ConnectionLine[] getConnectionLines() {
-		List<ConnectionLine> list = new ArrayList<ConnectionLine>();
-		UML_Object[] objects = editor.getSortedObject();
-
-		for (UML_Object i : objects) {
-			if (i instanceof ConnectionLine) {
-				ConnectionLine line = (ConnectionLine) i;
-				if (moveObj.equals(line.getStartObj()) || moveObj.equals(line.getEndObj())) {
-					list.add(line);
-				}
-			}
-		}
-
-		ConnectionLine[] result = new ConnectionLine[list.size()];
-		result = list.toArray(result);
-		return result;
-
 	}
 }

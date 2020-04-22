@@ -1,5 +1,6 @@
 package model;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 public abstract class ConnectionLine extends UML_Object {
@@ -16,6 +17,7 @@ public abstract class ConnectionLine extends UML_Object {
 		this.start = start;
 		this.end = end;
 		this.arrowSize = arrowSize;
+		super.setDepth(99);
 	}
 
 	@Override
@@ -54,6 +56,7 @@ public abstract class ConnectionLine extends UML_Object {
 	}
 
 	public void draw(Graphics g) {
+		g.setColor(Color.black);
 		g.drawLine(start.getX(), start.getY(), end.getX(), end.getY());
 		theta = Math.atan2(end.getY() - start.getY(), end.getX() - start.getX());
 	}

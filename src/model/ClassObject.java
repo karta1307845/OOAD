@@ -28,6 +28,7 @@ public class ClassObject extends BasicObject {
 		g.setColor(Color.black);
 		g.drawLine(x, y + height / 3, x + width, y + height / 3);
 		g.drawLine(x, y + 2 * height / 3, x + width, y + 2 * height / 3);
+		g.drawString(name, x + 10, y + 18);
 	}
 
 }

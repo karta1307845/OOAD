@@ -25,5 +25,6 @@ public class UseCaseObject extends BasicObject {
 		g.fillOval(x, y, width, height);
 		g.setColor(Color.black);
 		g.drawOval(x, y, width, height);
+		g.drawString(name, x + 30, y + 32);
 	}
 }

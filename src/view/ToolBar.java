@@ -13,22 +13,20 @@ import javax.swing.JPanel;
 import listener.ToolBarListener;
 import model.UML_Editor;
 
-public class ToolBar {
+public class ToolBar extends JPanel {
 	private UML_Editor editor;
-	private JPanel bar;
 	private List<JButton> buttonList;
 	private final int toolNum = 6;
 
 	ToolBar(UML_Editor editor) {
 		this.editor = editor;
-		bar = new JPanel();
 		buttonList = new ArrayList<JButton>();
 
 		initialize();
 	}
 
 	private void initialize() {
-		bar.setLayout(new GridLayout(toolNum, 1, 10, 10));
+		setLayout(new GridLayout(toolNum, 1, 10, 10));
 
 		for (int i = 0; i < toolNum; i++) {
 			Icon icon = new ImageIcon("images/tool" + i + ".png");
@@ -39,15 +37,11 @@ public class ToolBar {
 			button.setPreferredSize(new Dimension(50, 50));
 			button.setFocusPainted(false);
 			button.setContentAreaFilled(false);
-			button.addActionListener(new ToolBarListener(this));
+			button.addActionListener(new ToolBarListener(editor, this));
 
 			buttonList.add(button);
-			bar.add(button);
+			add(button);
 		}
-	}
-
-	JPanel getBar() {
-		return bar;
 	}
 
 	public int getButtonIndex(Object button) {
@@ -60,9 +54,5 @@ public class ToolBar {
 
 	public void releaseButton(int index) {
 		buttonList.get(index).setSelected(false);
-	}
-
-	public UML_Editor getEditor() {
-		return editor;
 	}
 }

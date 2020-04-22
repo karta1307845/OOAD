@@ -3,9 +3,9 @@ package event;
 import java.awt.Robot;
 import java.awt.event.MouseEvent;
 
-import model.BasicObject;
 import model.Location;
 import model.Rectangle;
+import model.ShapeObject;
 import model.UML_Editor;
 import model.UML_Object;
 
@@ -19,7 +19,7 @@ public class DrawRectangleEvent extends Event {
 
 	@Override
 	public void press(MouseEvent e) {
-		BasicObject obj = getClickedBasicObject(e);
+		ShapeObject obj = getClickedShapeObject(e);
 		if (obj == null) {
 			start = new Location(e.getX(), e.getY());
 			rec = new Rectangle(start, start);
@@ -42,6 +42,7 @@ public class DrawRectangleEvent extends Event {
 	@Override
 	public void release(MouseEvent e) {
 		if (precondition) {
+			editor.removeObject(rec);
 			editor.unSelectAllObjects();
 			UML_Object[] selectedObjects = rec.selectAllObjects(editor.getSortedObject());
 			if (selectedObjects.length > 0) {
@@ -49,7 +50,6 @@ public class DrawRectangleEvent extends Event {
 					editor.selectObject(i);
 				}
 			}
-			editor.removeObject(rec);
 		}
 		reset();
 	}
