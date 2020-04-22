@@ -79,8 +79,10 @@ public class CanvasListener implements MouseListener, MouseMotionListener {
 		case 0:
 			action1 = new MoveEvent(editor, robot);
 			action1.press(e);
+
 			action2 = new DrawRectangleEvent(editor, robot);
 			action2.press(e);
+
 			break;
 		case 1:
 		case 2:
@@ -95,9 +97,11 @@ public class CanvasListener implements MouseListener, MouseMotionListener {
 	public void mouseReleased(MouseEvent e) {
 		if (action1 != null) {
 			action1.release(e);
+			action1 = null;
 		}
 		if (action2 != null) {
 			action2.release(e);
+			action2 = null;
 		}
 		canvas.repaint();
 	}

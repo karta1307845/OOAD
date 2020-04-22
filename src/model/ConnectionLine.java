@@ -32,6 +32,19 @@ public abstract class ConnectionLine extends UML_Object {
 		end = end.move(deltaX, deltaY);
 	}
 
+	@Override
+	protected boolean isSelected(Location upperLeft, Location bottomRight) {
+		Location[] points = new Location[] { start, end };
+		for (Location point : points) {
+			int x = point.getX();
+			int y = point.getY();
+			if (x < upperLeft.getX() || x > bottomRight.getX() || y < upperLeft.getX() || y > bottomRight.getY()) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	public BasicObject getStartObj() {
 		return startObj;
 	}

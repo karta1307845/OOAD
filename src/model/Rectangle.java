@@ -21,31 +21,16 @@ public class Rectangle extends ShapeObject {
 		g.drawRect(position[0].getX(), position[0].getY(), width, height);
 	}
 
-	public ShapeObject[] selectAllShapeObjects(UML_Object[] objects) {
-		List<ShapeObject> list = new ArrayList<ShapeObject>();
-		int minX = position[0].getX();
-		int maxX = position[3].getX();
-		int minY = position[0].getY();
-		int maxY = position[3].getY();
+	public UML_Object[] selectAllObjects(UML_Object[] objects) {
+		List<UML_Object> list = new ArrayList<UML_Object>();
 
 		for (UML_Object i : objects) {
-			if (i instanceof ShapeObject) {
-				boolean inRectangle = true;
-				for (Location point : ((ShapeObject) i).position) {
-					int x = point.getX();
-					int y = point.getY();
-					if (x < minX || x > maxX || y < minY || y > maxY) {
-						inRectangle = false;
-						break;
-					}
-				}
-				if (inRectangle) {
-					list.add((ShapeObject) i);
-				}
+			if (i.isSelected(position[0], position[3])) {
+				list.add(i);
 			}
 		}
 
-		ShapeObject[] result = new ShapeObject[list.size()];
+		UML_Object[] result = new UML_Object[list.size()];
 		return list.toArray(result);
 	}
 

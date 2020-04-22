@@ -34,4 +34,16 @@ public abstract class ShapeObject extends UML_Object {
 			position[i] = position[i].move(deltaX, deltaY);
 		}
 	}
+
+	@Override
+	protected boolean isSelected(Location upperLeft, Location bottomRight) {
+		for (Location point : position) {
+			int x = point.getX();
+			int y = point.getY();
+			if (x < upperLeft.getX() || x > bottomRight.getX() || y < upperLeft.getX() || y > bottomRight.getY()) {
+				return false;
+			}
+		}
+		return true;
+	}
 }

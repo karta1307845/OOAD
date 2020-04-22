@@ -24,7 +24,9 @@ public abstract class Event {
 
 	public abstract void drag(MouseEvent e);
 
-	public abstract void release(MouseEvent e);
+	public void release(MouseEvent e) {
+		reset();
+	}
 
 	protected void reset() {
 		precondition = false;

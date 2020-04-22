@@ -6,8 +6,8 @@ import java.awt.event.MouseEvent;
 import model.BasicObject;
 import model.Location;
 import model.Rectangle;
-import model.ShapeObject;
 import model.UML_Editor;
+import model.UML_Object;
 
 public class DrawRectangleEvent extends Event {
 	private Rectangle rec;
@@ -22,6 +22,7 @@ public class DrawRectangleEvent extends Event {
 		BasicObject obj = getClickedBasicObject(e);
 		if (obj == null) {
 			start = new Location(e.getX(), e.getY());
+			rec = new Rectangle(start, start);
 			precondition = true;
 		}
 	}
@@ -42,14 +43,15 @@ public class DrawRectangleEvent extends Event {
 	public void release(MouseEvent e) {
 		if (precondition) {
 			editor.unSelectAllObjects();
-			ShapeObject[] selectedObjects = rec.selectAllShapeObjects(editor.getSortedObject());
+			UML_Object[] selectedObjects = rec.selectAllObjects(editor.getSortedObject());
 			if (selectedObjects.length > 0) {
-				for (ShapeObject i : selectedObjects) {
+				for (UML_Object i : selectedObjects) {
 					editor.selectObject(i);
 				}
 			}
 			editor.removeObject(rec);
 		}
+		reset();
 	}
 
 	protected void reset() {
