@@ -1,10 +1,12 @@
-package model;
+package object;
+
+import model.Location;
 
 public abstract class ShapeObject extends UML_Object {
 	protected Location[] position;
 	protected int width;
 	protected int height;
-
+	
 	protected void calculatePosition(Location upperLeft) {
 		position = new Location[4];
 		position[0] = upperLeft;
@@ -13,6 +15,7 @@ public abstract class ShapeObject extends UML_Object {
 		position[3] = upperLeft.move(width, height);
 	}
 
+	@Override
 	public boolean isClicked(Location clickPoint) {
 		int x = clickPoint.getX();
 		int y = clickPoint.getY();

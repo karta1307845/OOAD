@@ -8,17 +8,18 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 import listener.CanvasListener;
-import model.UML_Editor;
-import model.UML_Object;
+import model.CanvasModel;
+import model.ToolBarModel;
+import object.UML_Object;
 
 public class Canvas extends JPanel {
 	public static final int objectColor = 0xDDDDDD;
-	private UML_Editor editor;
+	private CanvasModel model;
 	private CanvasListener listener;
 
-	Canvas(UML_Editor editor) throws AWTException {
-		this.editor = editor;
-		listener = new CanvasListener(editor, this);
+	Canvas() throws AWTException {
+		model = CanvasModel.getInstance();
+		listener = new CanvasListener(model, this, ToolBarModel.getInstance());
 		initialize();
 	}
 
@@ -37,7 +38,7 @@ public class Canvas extends JPanel {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		UML_Object[] objects = editor.getSortedObject();
+		UML_Object[] objects = model.getSortedObject();
 		for (UML_Object i : objects) {
 			i.draw(g);
 		}

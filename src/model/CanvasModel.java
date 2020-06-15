@@ -5,28 +5,25 @@ import java.util.Arrays;
 import java.util.List;
 
 import object.BasicObject;
-import object.CompositeObject;
 import object.ConnectionLine;
 import object.ShapeObject;
 import object.UML_Object;
 
-public class UML_Editor {
-	private int mode;
+public class CanvasModel {
+	private static CanvasModel instance;
 	private int currentDepth;
 	private List<UML_Object> objects;
 
-	public UML_Editor() {
-		mode = -1;
+	private CanvasModel() {
 		currentDepth = 0;
 		objects = new ArrayList<UML_Object>();
 	}
 
-	public void setMode(int index) {
-		mode = index;
-	}
-
-	public int getMode() {
-		return mode;
+	public static CanvasModel getInstance() {
+		if (instance == null) {
+			instance = new CanvasModel();
+		}
+		return instance;
 	}
 
 	public void setCurrentDepth(int depth) {
@@ -38,11 +35,9 @@ public class UML_Editor {
 	}
 
 	public void addObject(UML_Object obj) {
-		if (obj instanceof BasicObject || obj instanceof CompositeObject) {
-			obj.setDepth(currentDepth);
-			if (currentDepth < 99) {
-				currentDepth++;
-			}
+		obj.setDepth(currentDepth);
+		if (currentDepth < 99) {
+			currentDepth++;
 		}
 		objects.add(obj);
 	}

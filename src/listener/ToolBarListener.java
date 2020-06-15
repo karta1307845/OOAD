@@ -1,5 +1,6 @@
 package listener;
 
+import java.awt.AWTException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
@@ -16,42 +17,26 @@ public class ToolBarListener implements ActionListener {
 	private ToolBarModel model;
 	private ToolBar toolbar;
 	private ModeFactory factory;
-	private HashMap<Integer, Mode> map;
 
 	public ToolBarListener(ToolBarModel model, ToolBar toolbar) {
 		this.toolbar = toolbar;
 		this.model = model;
-		factory = new ModeFactory();
-		createMap();
+		try {
+			factory = new ModeFactory();
+		} catch (AWTException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		Mode mode = model.getMode();
 		int index = toolbar.getButtonIndex(e.getSource());
+		Mode mode = factory.createMode(index);
 
 		if (index != -1) {
-			if (mode != null) {
-				toolbar.releaseButton(getModeIndex(mode));
-			}
-			model.setMode(map.get(index));
+			model.setMode(mode);
 			toolbar.pressButton(index);
 		}
-	}
-
-	private void createMap() {
-		map = new HashMap<Integer, Mode>();
-		map.put(0, new SelectMode());
-	}
-
-	private int getModeIndex(Mode mode) {
-		Set<Integer> keyset = map.keySet();
-		for (int i : keyset) {
-			if (map.get(i).equals(mode)) {
-				return i;
-			}
-		}
-		return -1;
 	}
 
 }

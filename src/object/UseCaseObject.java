@@ -1,8 +1,9 @@
-package model;
+package object;
 
 import java.awt.Color;
 import java.awt.Graphics;
 
+import model.Location;
 import view.Canvas;
 
 public class UseCaseObject extends BasicObject {

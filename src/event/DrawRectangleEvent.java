@@ -4,10 +4,10 @@ import java.awt.Robot;
 import java.awt.event.MouseEvent;
 
 import model.Location;
-import model.Rectangle;
-import model.ShapeObject;
 import model.UML_Editor;
-import model.UML_Object;
+import object.Rectangle;
+import object.ShapeObject;
+import object.UML_Object;
 
 public class DrawRectangleEvent extends Event {
 	private Rectangle rec;

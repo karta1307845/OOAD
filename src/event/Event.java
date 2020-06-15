@@ -4,11 +4,11 @@ import java.awt.Color;
 import java.awt.Robot;
 import java.awt.event.MouseEvent;
 
-import model.BasicObject;
 import model.Location;
-import model.ShapeObject;
 import model.UML_Editor;
-import model.UML_Object;
+import object.BasicObject;
+import object.ShapeObject;
+import object.UML_Object;
 
 public abstract class Event {
 	protected UML_Editor editor;

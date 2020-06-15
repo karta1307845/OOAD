@@ -1,6 +1,8 @@
-package model;
+package object;
 
 import java.awt.Graphics;
+
+import model.Location;
 
 public abstract class UML_Object implements Comparable<UML_Object> {
 	protected int depth;
@@ -25,6 +27,14 @@ public abstract class UML_Object implements Comparable<UML_Object> {
 
 	public void setSelected(boolean selected) {
 		this.selected = selected;
+	}
+
+	public boolean getSelected() {
+		return selected;
+	}
+
+	public boolean isClicked(Location clickPoint) {
+		return false;
 	}
 
 	protected abstract boolean isSelected(Location upperLeft, Location bottomRight);

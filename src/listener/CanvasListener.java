@@ -11,51 +11,31 @@ import event.DrawRectangleEvent;
 import event.Event;
 import event.MoveEvent;
 import event.SelectEvent;
-import model.ClassObject;
+import mode.Mode;
+import model.CanvasModel;
 import model.Location;
-import model.ShapeObject;
+import model.ToolBarModel;
 import model.UML_Editor;
-import model.UseCaseObject;
+import object.ClassObject;
+import object.ShapeObject;
+import object.UseCaseObject;
 import view.Canvas;
 
 public class CanvasListener implements MouseListener, MouseMotionListener {
-	private Robot robot;
-	private UML_Editor editor;
+	private CanvasModel model;
 	private Canvas canvas;
+	private ToolBarModel toolbarModel;
 
-	private Event select;
-	private Event multiSelect;
-	private Event action;
 
-	public CanvasListener(UML_Editor editor, Canvas canvas) throws AWTException {
+	public CanvasListener(CanvasModel model, Canvas canvas, ToolBarModel toolbarModel) throws AWTException {
 		this.canvas = canvas;
-		this.editor = editor;
-		robot = new Robot();
-		select = new SelectEvent(editor, robot);
-		multiSelect = new DrawRectangleEvent(editor, robot);
+		this.model = model;
+		this.toolbarModel = toolbarModel;
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		int mode = editor.getMode();
-		int x = e.getX();
-		int y = e.getY();
 
-		switch (mode) {
-		case 0:
-			select.press(e);
-			break;
-		case 4:
-			ShapeObject obj;
-			obj = new ClassObject(new Location(x, y));
-			editor.addObject(obj);
-			break;
-		case 5:
-			obj = new UseCaseObject(new Location(x, y));
-			editor.addObject(obj);
-			break;
-		}
-		canvas.repaint();
 	}
 
 	@Override
@@ -72,41 +52,31 @@ public class CanvasListener implements MouseListener, MouseMotionListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		int mode = editor.getMode();
-
-		switch (mode) {
-		case 0:
-			action = new MoveEvent(editor, robot);
-			action.press(e);
-			multiSelect.press(e);
-			break;
-		case 1:
-		case 2:
-		case 3:
-			action = new DrawLineEvent(editor, robot, mode);
-			action.press(e);
-			break;
+		Mode mode = toolbarModel.getMode();
+		if(mode == null) {
+			return;
 		}
+		mode.mousePressed(e);
+		canvas.repaint();
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		if (action != null) {
-			action.release(e);
-			action = null;
+		Mode mode = toolbarModel.getMode();
+		if(mode == null) {
+			return;
 		}
-		multiSelect.release(e);
-
+		mode.mouseReleased(e);
 		canvas.repaint();
 	}
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		if (action != null) {
-			action.drag(e);
+		Mode mode = toolbarModel.getMode();
+		if(mode == null) {
+			return;
 		}
-		multiSelect.drag(e);
-
+		mode.mouseDragged(e);
 		canvas.repaint();
 	}
 

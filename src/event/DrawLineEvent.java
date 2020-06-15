@@ -3,13 +3,13 @@ package event;
 import java.awt.Robot;
 import java.awt.event.MouseEvent;
 
-import model.AssociationLine;
-import model.BasicObject;
-import model.CompositionLine;
-import model.ConnectionLine;
-import model.GeneralizationLine;
 import model.Location;
 import model.UML_Editor;
+import object.AssociationLine;
+import object.BasicObject;
+import object.CompositionLine;
+import object.ConnectionLine;
+import object.GeneralizationLine;
 
 public class DrawLineEvent extends Event {
 	private BasicObject startObj;

@@ -8,12 +8,12 @@ import java.util.Set;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import model.BasicObject;
-import model.CompositeObject;
-import model.ConnectionLine;
-import model.ShapeObject;
 import model.UML_Editor;
-import model.UML_Object;
+import object.BasicObject;
+import object.CompositeObject;
+import object.ConnectionLine;
+import object.ShapeObject;
+import object.UML_Object;
 import view.MenuBar;
 
 public class MenuBarListener implements ActionListener {
@@ -46,7 +46,7 @@ public class MenuBarListener implements ActionListener {
 
 			ConnectionLine[] lineAry = new ConnectionLine[lineSet.size()];
 			lineAry = lineSet.toArray(lineAry);
-			UML_Object obj = new CompositeObject(selectedObjects, lineAry);
+			UML_Object obj = new CompositeObject(selectedObjects);
 			editor.addObject(obj);
 
 			canvas.repaint();

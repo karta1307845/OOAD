@@ -1,43 +1,46 @@
-package model;
+package object;
 
 import java.awt.Color;
 import java.awt.Graphics;
 
+import model.Location;
+
 public abstract class ConnectionLine extends UML_Object {
-	protected BasicObject startObj;
-	protected BasicObject endObj;
-	protected Location start;
-	protected Location end;
+	protected Port start;
+	protected Port end;
 	protected double theta;
 	protected int arrowSize;
 
-	public ConnectionLine(BasicObject startObj, Location start, BasicObject endObj, Location end, int arrowSize) {
-		this.startObj = startObj;
-		this.endObj = endObj;
+	public ConnectionLine(Port start, Port end, int arrowSize) {
 		this.start = start;
 		this.end = end;
 		this.arrowSize = arrowSize;
-		super.setDepth(99);
 	}
 
 	@Override
+	public void setDepth(int depth) {
+		super.setDepth(99);
+	}
+	
+	@Override
 	public void move(int deltaX, int deltaY) {
-		moveStart(deltaX, deltaY);
-		moveEnd(deltaX, deltaY);
+		
+		//moveStart(deltaX, deltaY);
+		//moveEnd(deltaX, deltaY);
 	}
 
-	public void moveStart(int deltaX, int deltaY) {
-		start = start.move(deltaX, deltaY);
+	/*public void moveStart(int deltaX, int deltaY) {
+		start.move(deltaX, deltaY);
 	}
 
 	public void moveEnd(int deltaX, int deltaY) {
-		end = end.move(deltaX, deltaY);
-	}
+		end.move(deltaX, deltaY);
+	}*/
 
 	@Override
 	protected boolean isSelected(Location upperLeft, Location bottomRight) {
-		Location[] points = new Location[] { start, end };
-		for (Location point : points) {
+		Port[] points = new Port[] { start, end };
+		for (Port point : points) {
 			int x = point.getX();
 			int y = point.getY();
 			if (x < upperLeft.getX() || x > bottomRight.getX() || y < upperLeft.getX() || y > bottomRight.getY()) {
@@ -48,11 +51,11 @@ public abstract class ConnectionLine extends UML_Object {
 	}
 
 	public BasicObject getStartObj() {
-		return startObj;
+		return start.getParent();
 	}
 
 	public BasicObject getEndObj() {
-		return endObj;
+		return end.getParent();
 	}
 
 	public void draw(Graphics g) {

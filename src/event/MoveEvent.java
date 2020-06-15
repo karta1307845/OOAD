@@ -3,11 +3,11 @@ package event;
 import java.awt.Robot;
 import java.awt.event.MouseEvent;
 
-import model.ConnectionLine;
 import model.Location;
-import model.ShapeObject;
 import model.UML_Editor;
-import model.UML_Object;
+import object.ConnectionLine;
+import object.ShapeObject;
+import object.UML_Object;
 
 public class MoveEvent extends Event {
 	private UML_Object moveObj;

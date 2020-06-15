@@ -12,18 +12,15 @@ import javax.swing.JPanel;
 
 import listener.ToolBarListener;
 import model.ToolBarModel;
-import model.UML_Editor;
 
 public class ToolBar extends JPanel {
 	private ToolBarModel model;
-	private UML_Editor editor;
 	private List<JButton> buttonList;
 	private final int toolNum = 6;
 	private int pressedButtonIndex;
 
-	ToolBar(UML_Editor editor) {
-		model = new ToolBarModel();
-		this.editor = editor;
+	ToolBar() {
+		model = ToolBarModel.getInstance();
 		buttonList = new ArrayList<JButton>();
 		pressedButtonIndex = -1;
 
@@ -54,15 +51,10 @@ public class ToolBar extends JPanel {
 	}
 
 	public void pressButton(int index) {
+		if (pressedButtonIndex != -1) {
+			buttonList.get(pressedButtonIndex).setSelected(false);
+		}
 		pressedButtonIndex = index;
 		buttonList.get(index).setSelected(true);
-	}
-
-	public void releaseButton(int index) {
-		buttonList.get(index).setSelected(false);
-	}
-
-	public int getPressedButtonIndex() {
-		return pressedButtonIndex;
 	}
 }

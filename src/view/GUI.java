@@ -14,12 +14,12 @@ import model.UML_Editor;
 
 public class GUI extends JFrame {
 	private JPanel canvas;
-	private JPanel toolbar;
+	private ToolBar toolbar;
 	private JMenuBar menu;
 
 	public GUI(UML_Editor editor) throws AWTException {
-		canvas = new Canvas(editor);
-		toolbar = new ToolBar(editor);
+		toolbar = new ToolBar();
+		canvas = new Canvas();
 		menu = new MenuBar(editor, canvas);
 
 		initialize();

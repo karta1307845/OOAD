@@ -3,8 +3,8 @@ package event;
 import java.awt.Robot;
 import java.awt.event.MouseEvent;
 
-import model.ShapeObject;
 import model.UML_Editor;
+import object.ShapeObject;
 
 public class SelectEvent extends Event {
 

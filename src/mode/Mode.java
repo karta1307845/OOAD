@@ -6,22 +6,18 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
-import model.BasicObject;
+import model.CanvasModel;
 import model.Location;
-import model.ShapeObject;
-import model.UML_Editor;
-import model.UML_Object;
+import object.BasicObject;
+import object.ShapeObject;
+import object.UML_Object;
 
 public class Mode implements MouseListener, MouseMotionListener {
-	protected UML_Editor editor;
+	protected CanvasModel canvas;
 	protected Robot robot;
-	
-	public Mode() {
-		
-	}
-	
-	public Mode(UML_Editor editor, Robot robot) {
-		this.editor = editor;
+
+	public Mode(CanvasModel canvas, Robot robot) {
+		this.canvas = canvas;
 		this.robot = robot;
 	}
 
@@ -69,7 +65,7 @@ public class Mode implements MouseListener, MouseMotionListener {
 
 	protected BasicObject getClickedBasicObject(MouseEvent e) {
 		if (!robot.getPixelColor(e.getXOnScreen(), e.getYOnScreen()).equals(Color.white)) {
-			UML_Object[] objects = editor.getSortedObject();
+			UML_Object[] objects = canvas.getSortedObject();
 			Location point = new Location(e.getX(), e.getY());
 
 			for (int i = objects.length - 1; i >= 0; i--) {
@@ -85,7 +81,7 @@ public class Mode implements MouseListener, MouseMotionListener {
 	}
 
 	protected ShapeObject getClickedShapeObject(MouseEvent e) {
-		UML_Object[] objects = editor.getSortedObject();
+		UML_Object[] objects = canvas.getSortedObject();
 		Location point = new Location(e.getX(), e.getY());
 
 		for (int i = objects.length - 1; i >= 0; i--) {

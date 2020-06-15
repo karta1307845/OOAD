@@ -1,26 +1,22 @@
-package model;
+package object;
 
 import java.awt.Color;
 import java.awt.Graphics;
 
+import model.Location;
+
 public class CompositeObject extends ShapeObject {
 	private ShapeObject[] elements;
-	private ConnectionLine[] lines;
 	private final int padding = 20;
 
-	public CompositeObject(ShapeObject[] elements, ConnectionLine[] lines) {
+	public CompositeObject(ShapeObject[] elements) {
 		this.elements = elements;
-		this.lines = lines;
 		setSelected(true);
 		calculatePosition();
 	}
 
-	public ShapeObject[] getElements() {
+	public UML_Object[] getElements() {
 		return elements;
-	}
-
-	public ConnectionLine[] getLines() {
-		return lines;
 	}
 
 	private void calculatePosition() {
@@ -52,7 +48,7 @@ public class CompositeObject extends ShapeObject {
 	@Override
 	public void setSelected(boolean selected) {
 		super.setSelected(selected);
-		for (ShapeObject i : elements) {
+		for (UML_Object i : elements) {
 			i.setSelected(selected);
 		}
 	}
@@ -62,14 +58,6 @@ public class CompositeObject extends ShapeObject {
 		super.move(deltaX, deltaY);
 		for (ShapeObject i : elements) {
 			i.move(deltaX, deltaY);
-			for (ConnectionLine j : lines) {
-				if (i.equals(j.getStartObj())) {
-					j.moveStart(deltaX, deltaY);
-				}
-				if (i.equals(j.getEndObj())) {
-					j.moveEnd(deltaX, deltaY);
-				}
-			}
 		}
 	}
 

@@ -1,9 +1,11 @@
-package model;
+package object;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
+
+import model.Location;
 
 public class Rectangle extends ShapeObject {
 

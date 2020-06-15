@@ -1,11 +1,13 @@
-package model;
+package object;
 
 import java.awt.Color;
 import java.awt.Graphics;
 
+import model.Location;
+
 public abstract class BasicObject extends ShapeObject {
 	protected String name;
-	protected Location[] ports;
+	protected Port[] ports;
 	protected final int portSize = 5;
 
 	public BasicObject(String name, Location upperLeft, int width, int height) {
@@ -17,14 +19,14 @@ public abstract class BasicObject extends ShapeObject {
 	}
 
 	private void createPorts() {
-		ports = new Location[4];
-		ports[0] = position[0].move(width / 2, 0);
-		ports[1] = position[0].move(0, height / 2);
-		ports[2] = position[0].move(width, height / 2);
-		ports[3] = position[0].move(width / 2, height);
+		ports = new Port[4];
+		ports[0] = new Port(position[0].move(width / 2, 0), this);
+		ports[1] = new Port(position[0].move(0, height / 2), this);
+		ports[2] = new Port(position[0].move(width, height / 2), this);
+		ports[3] = new Port(position[0].move(width / 2, height), this);
 	}
 
-	public Location[] getPorts() {
+	public Port[] getPorts() {
 		return ports;
 	}
 
@@ -32,7 +34,7 @@ public abstract class BasicObject extends ShapeObject {
 		this.name = name;
 	}
 
-	public Location getMappingPort(Location clickPoint) {
+	public Port getMappingPort(Location clickPoint) {
 		double diagonalSlope1 = position[3].getSlope(position[0]);
 		double diagonalSlope2 = position[2].getSlope(position[1]);
 		double slope1 = clickPoint.getSlope(position[0]);
@@ -63,7 +65,7 @@ public abstract class BasicObject extends ShapeObject {
 	public void move(int deltaX, int deltaY) {
 		super.move(deltaX, deltaY);
 		for (int i = 0; i < 4; i++) {
-			ports[i] = ports[i].move(deltaX, deltaY);
+			ports[i].move(deltaX, deltaY);
 		}
 	}
 
@@ -71,7 +73,7 @@ public abstract class BasicObject extends ShapeObject {
 	public void draw(Graphics g) {
 		g.setColor(Color.black);
 		if (selected) {
-			for (Location i : ports) {
+			for (Port i : ports) {
 				int x = i.getX();
 				int y = i.getY();
 				int[] xAry = new int[] { x + portSize, x + portSize, x - portSize, x - portSize };

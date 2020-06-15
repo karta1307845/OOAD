@@ -1,12 +1,14 @@
-package model;
+package object;
 
 import java.awt.Color;
 import java.awt.Graphics;
 
+import model.Location;
+
 public class GeneralizationLine extends ConnectionLine {
 
-	public GeneralizationLine(BasicObject startObj, Location start, BasicObject endObj, Location end) {
-		super(startObj, start, endObj, end, 10);
+	public GeneralizationLine(Port start, Port end) {
+		super(start, end, 10);
 	}
 
 	@Override
@@ -14,10 +16,10 @@ public class GeneralizationLine extends ConnectionLine {
 		super.draw(g);
 
 		Location arrowPoint1 = new Location(-arrowSize, -arrowSize);
-		arrowPoint1 = arrowPoint1.rotate(end, theta);
+		arrowPoint1 = arrowPoint1.rotate(end.getLocation(), theta);
 
 		Location arrowPoint2 = new Location(-arrowSize, arrowSize);
-		arrowPoint2 = arrowPoint2.rotate(end, theta);
+		arrowPoint2 = arrowPoint2.rotate(end.getLocation(), theta);
 
 		int[] xAry = new int[] { end.getX(), arrowPoint1.getX(), arrowPoint2.getX() };
 		int[] yAry = new int[] { end.getY(), arrowPoint1.getY(), arrowPoint2.getY() };
