@@ -60,7 +60,7 @@ public abstract class BasicObject extends ShapeObject {
 			return ports[1];
 		}
 	}
-
+	
 	@Override
 	public void move(int deltaX, int deltaY) {
 		super.move(deltaX, deltaY);

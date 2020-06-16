@@ -30,15 +30,17 @@ public abstract class UML_Object implements Comparable<UML_Object> {
 	}
 
 	public boolean getSelected() {
-		return selected;
+		return false;
 	}
 
 	public boolean isClicked(Location clickPoint) {
 		return false;
 	}
 
-	protected abstract boolean isSelected(Location upperLeft, Location bottomRight);
-
+	protected boolean isInsideSelectArea(SelectArea area) {
+		return false;
+	}
+	
 	public abstract void move(int deltaX, int deltaY);
 
 	public abstract void draw(Graphics g);

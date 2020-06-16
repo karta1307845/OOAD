@@ -1,19 +1,14 @@
 package object;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import model.Location;
 
 public class Port {
 	private Location location;
 	private BasicObject parent;
-	private List<ConnectionLine> lines;
 	
 	public Port(Location location, BasicObject parent) {
 		this.location = location;
 		this.parent = parent;
-		lines = new ArrayList<ConnectionLine>();
 	}
 	
 	public void move(int deltaX, int deltaY) {

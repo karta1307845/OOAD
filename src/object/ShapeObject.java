@@ -6,13 +6,18 @@ public abstract class ShapeObject extends UML_Object {
 	protected Location[] position;
 	protected int width;
 	protected int height;
-	
+
 	protected void calculatePosition(Location upperLeft) {
 		position = new Location[4];
 		position[0] = upperLeft;
 		position[1] = upperLeft.move(width, 0);
 		position[2] = upperLeft.move(0, height);
 		position[3] = upperLeft.move(width, height);
+	}
+
+	@Override
+	public boolean getSelected() {
+		return selected;
 	}
 
 	@Override
@@ -39,7 +44,9 @@ public abstract class ShapeObject extends UML_Object {
 	}
 
 	@Override
-	protected boolean isSelected(Location upperLeft, Location bottomRight) {
+	protected boolean isInsideSelectArea(SelectArea area) {
+		Location upperLeft = area.position[0];
+		Location bottomRight = area.position[3];
 		for (Location point : position) {
 			int x = point.getX();
 			int y = point.getY();

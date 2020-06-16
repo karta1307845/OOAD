@@ -63,6 +63,10 @@ public class Mode implements MouseListener, MouseMotionListener {
 
 	}
 
+	protected void reset() {
+
+	}
+
 	protected BasicObject getClickedBasicObject(MouseEvent e) {
 		if (!robot.getPixelColor(e.getXOnScreen(), e.getYOnScreen()).equals(Color.white)) {
 			UML_Object[] objects = canvas.getSortedObject();
@@ -70,10 +74,8 @@ public class Mode implements MouseListener, MouseMotionListener {
 
 			for (int i = objects.length - 1; i >= 0; i--) {
 				UML_Object obj = objects[i];
-				if (obj instanceof BasicObject) {
-					if (((BasicObject) obj).isClicked(point)) {
-						return (BasicObject) obj;
-					}
+				if (obj.isClicked(point)) {
+					return (BasicObject) obj;
 				}
 			}
 		}
@@ -86,10 +88,8 @@ public class Mode implements MouseListener, MouseMotionListener {
 
 		for (int i = objects.length - 1; i >= 0; i--) {
 			UML_Object obj = objects[i];
-			if (obj instanceof ShapeObject) {
-				if (((ShapeObject) obj).isClicked(point)) {
-					return (ShapeObject) obj;
-				}
+			if (obj.isClicked(point)) {
+				return (ShapeObject) obj;
 			}
 		}
 		return null;

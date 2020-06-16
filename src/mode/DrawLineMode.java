@@ -13,11 +13,9 @@ public abstract class DrawLineMode extends Mode {
 	protected BasicObject startObj;
 	protected ConnectionLine line;
 	protected Port start;
-	protected boolean precondition;
-	
+
 	public DrawLineMode(CanvasModel canvas, Robot robot) {
 		super(canvas, robot);
-		precondition = false;
 	}
 
 	@Override
@@ -26,13 +24,12 @@ public abstract class DrawLineMode extends Mode {
 		startObj = getClickedBasicObject(e);
 		if (startObj != null) {
 			start = startObj.getMappingPort(point);
-			precondition = true;
 		}
 	}
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		if (precondition) {
+		if (startObj != null) {
 			if (line != null) {
 				canvas.removeObject(line);
 			}
@@ -44,7 +41,7 @@ public abstract class DrawLineMode extends Mode {
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		if (precondition) {
+		if (startObj != null) {
 			Location point = new Location(e.getX(), e.getY());
 			BasicObject endObj = getClickedBasicObject(e);
 			canvas.removeObject(line);
@@ -55,13 +52,12 @@ public abstract class DrawLineMode extends Mode {
 		}
 		reset();
 	}
-	
+
 	protected void reset() {
 		startObj = null;
 		line = null;
 		start = null;
-		precondition = false;
 	}
-	
+
 	protected abstract ConnectionLine createLine(Port start, Port end);
 }

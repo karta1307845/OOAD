@@ -1,31 +1,19 @@
 package listener;
 
 import java.awt.AWTException;
-import java.awt.Robot;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
-import event.DrawLineEvent;
-import event.DrawRectangleEvent;
-import event.Event;
-import event.MoveEvent;
-import event.SelectEvent;
 import mode.Mode;
 import model.CanvasModel;
-import model.Location;
 import model.ToolBarModel;
-import model.UML_Editor;
-import object.ClassObject;
-import object.ShapeObject;
-import object.UseCaseObject;
 import view.Canvas;
 
 public class CanvasListener implements MouseListener, MouseMotionListener {
 	private CanvasModel model;
 	private Canvas canvas;
 	private ToolBarModel toolbarModel;
-
 
 	public CanvasListener(CanvasModel model, Canvas canvas, ToolBarModel toolbarModel) throws AWTException {
 		this.canvas = canvas;
@@ -53,7 +41,7 @@ public class CanvasListener implements MouseListener, MouseMotionListener {
 	@Override
 	public void mousePressed(MouseEvent e) {
 		Mode mode = toolbarModel.getMode();
-		if(mode == null) {
+		if (mode == null) {
 			return;
 		}
 		mode.mousePressed(e);
@@ -63,7 +51,7 @@ public class CanvasListener implements MouseListener, MouseMotionListener {
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		Mode mode = toolbarModel.getMode();
-		if(mode == null) {
+		if (mode == null) {
 			return;
 		}
 		mode.mouseReleased(e);
@@ -73,7 +61,7 @@ public class CanvasListener implements MouseListener, MouseMotionListener {
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		Mode mode = toolbarModel.getMode();
-		if(mode == null) {
+		if (mode == null) {
 			return;
 		}
 		mode.mouseDragged(e);

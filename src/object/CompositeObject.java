@@ -48,7 +48,7 @@ public class CompositeObject extends ShapeObject {
 	@Override
 	public void setSelected(boolean selected) {
 		super.setSelected(selected);
-		for (UML_Object i : elements) {
+		for (ShapeObject i : elements) {
 			i.setSelected(selected);
 		}
 	}

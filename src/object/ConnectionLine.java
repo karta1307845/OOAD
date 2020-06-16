@@ -3,8 +3,6 @@ package object;
 import java.awt.Color;
 import java.awt.Graphics;
 
-import model.Location;
-
 public abstract class ConnectionLine extends UML_Object {
 	protected Port start;
 	protected Port end;
@@ -36,19 +34,6 @@ public abstract class ConnectionLine extends UML_Object {
 	public void moveEnd(int deltaX, int deltaY) {
 		end.move(deltaX, deltaY);
 	}*/
-
-	@Override
-	protected boolean isSelected(Location upperLeft, Location bottomRight) {
-		Port[] points = new Port[] { start, end };
-		for (Port point : points) {
-			int x = point.getX();
-			int y = point.getY();
-			if (x < upperLeft.getX() || x > bottomRight.getX() || y < upperLeft.getX() || y > bottomRight.getY()) {
-				return false;
-			}
-		}
-		return true;
-	}
 
 	public BasicObject getStartObj() {
 		return start.getParent();

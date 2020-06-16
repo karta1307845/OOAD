@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import object.BasicObject;
-import object.ConnectionLine;
-import object.ShapeObject;
 import object.UML_Object;
 
 public class CanvasModel {
@@ -74,26 +71,6 @@ public class CanvasModel {
 		return count;
 	}
 
-	public int countSelectedBasicObjects() {
-		int count = 0;
-		for (UML_Object i : objects) {
-			if (i.getSelected() && i instanceof BasicObject) {
-				count++;
-			}
-		}
-		return count;
-	}
-
-	public int countSelectedShapeObjects() {
-		int count = 0;
-		for (UML_Object i : objects) {
-			if (i.getSelected() && i instanceof ShapeObject) {
-				count++;
-			}
-		}
-		return count;
-	}
-
 	public UML_Object[] getSelectedObjects() {
 		List<UML_Object> list = new ArrayList<UML_Object>();
 
@@ -108,50 +85,4 @@ public class CanvasModel {
 		return result;
 	}
 
-	public BasicObject[] getSelectedBasicObjects() {
-		UML_Object[] selctedObjects = getSelectedObjects();
-		List<BasicObject> list = new ArrayList<BasicObject>();
-
-		for (UML_Object i : selctedObjects) {
-			if (i instanceof BasicObject) {
-				list.add((BasicObject) i);
-			}
-		}
-
-		BasicObject[] result = new BasicObject[list.size()];
-		result = list.toArray(result);
-		return result;
-	}
-
-	public ShapeObject[] getSelectedShapeObjects() {
-		UML_Object[] selctedObjects = getSelectedObjects();
-		List<ShapeObject> list = new ArrayList<ShapeObject>();
-
-		for (UML_Object i : selctedObjects) {
-			if (i instanceof ShapeObject) {
-				list.add((ShapeObject) i);
-			}
-		}
-
-		ShapeObject[] result = new ShapeObject[list.size()];
-		result = list.toArray(result);
-		return result;
-	}
-
-	public ConnectionLine[] getConnectionLines(UML_Object obj) {
-		List<ConnectionLine> list = new ArrayList<ConnectionLine>();
-
-		for (UML_Object i : objects) {
-			if (i instanceof ConnectionLine) {
-				ConnectionLine line = (ConnectionLine) i;
-				if (obj.equals(line.getStartObj()) || obj.equals(line.getEndObj())) {
-					list.add(line);
-				}
-			}
-		}
-
-		ConnectionLine[] result = new ConnectionLine[list.size()];
-		result = list.toArray(result);
-		return result;
-	}
 }
