@@ -7,8 +7,9 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
+import listener.ChangeNameListener;
 import listener.GroupListener;
-import listener.MenuBarListener;
+import listener.UnGroupListener;
 
 public class MenuBar extends JMenuBar {
 	private JMenu fileMenu;
@@ -29,11 +30,11 @@ public class MenuBar extends JMenuBar {
 		groupItem.setActionCommand("Group");
 
 		JMenuItem unGroupItem = new JMenuItem("UnGroup");
-		unGroupItem.addActionListener(new MenuBarListener(canvas));
+		unGroupItem.addActionListener(new UnGroupListener(canvas, toolbar));
 		unGroupItem.setActionCommand("UnGroup");
 
 		JMenuItem changeNameItem = new JMenuItem("Change Object Name");
-		changeNameItem.addActionListener(new MenuBarListener(canvas));
+		changeNameItem.addActionListener(new ChangeNameListener(canvas, toolbar));
 		changeNameItem.setActionCommand("ChangeName");
 
 		editMenu.add(groupItem);

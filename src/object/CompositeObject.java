@@ -7,17 +7,7 @@ import model.Location;
 
 public class CompositeObject extends ShapeObject {
 	private UML_Object[] elements;
-	private final int padding = 20;
-
-	public CompositeObject(UML_Object[] elements) {
-		this.elements = elements;
-		setSelected(true);
-		calculatePosition();
-	}
-
-	public UML_Object[] getElements() {
-		return elements;
-	}
+	private final int padding = 10;
 
 	private void calculatePosition() {
 		position = new Location[4];
@@ -47,13 +37,30 @@ public class CompositeObject extends ShapeObject {
 		height = maxWidth + padding * 2;
 		super.calculatePosition(new Location(minX - padding, minY - padding));
 	}
-
+	
 	@Override
 	public void setSelected(boolean selected) {
 		super.setSelected(selected);
 		for (UML_Object i : elements) {
 			i.setSelected(selected);
 		}
+	}
+
+	@Override
+	public boolean isCompositeObject() {
+		return true;
+	}
+	
+	@Override
+	public void group(UML_Object[] elements) {
+		this.elements = elements;
+		setSelected(true);
+		calculatePosition();
+	}
+
+	@Override
+	public UML_Object[] unGroup() {
+		return elements;
 	}
 
 	@Override

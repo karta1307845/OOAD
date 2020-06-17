@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -10,14 +9,12 @@ import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 
-import model.UML_Editor;
-
 public class GUI extends JFrame {
 	private JPanel canvas;
 	private ToolBar toolbar;
 	private JMenuBar menu;
 
-	public GUI(UML_Editor editor) throws AWTException {
+	public GUI(){
 		toolbar = new ToolBar();
 		canvas = new Canvas();
 		menu = new MenuBar(canvas, toolbar);

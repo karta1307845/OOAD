@@ -3,14 +3,10 @@ package listener;
 import java.awt.AWTException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
-import java.util.Set;
 
 import mode.Mode;
 import mode.ModeFactory;
-import mode.SelectMode;
 import model.ToolBarModel;
-import model.UML_Editor;
 import view.ToolBar;
 
 public class ToolBarListener implements ActionListener {

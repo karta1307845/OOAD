@@ -24,15 +24,7 @@ public abstract class ConnectionLine extends UML_Object {
 	public void setSelected(boolean selected) {
 		selected = false;
 	}
-
-	public BasicObject getStartObj() {
-		return start.getParent();
-	}
-
-	public BasicObject getEndObj() {
-		return end.getParent();
-	}
-
+	
 	public void draw(Graphics g) {
 		g.setColor(Color.black);
 		g.drawLine(start.getX(), start.getY(), end.getX(), end.getY());

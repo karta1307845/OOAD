@@ -16,6 +16,11 @@ public class SelectArea extends ShapeObject {
 	}
 
 	@Override
+	public void setDepth(int depth) {
+		super.setDepth(99);
+	}
+	
+	@Override
 	public void draw(Graphics g) {
 		g.setColor(Color.blue);
 		g.drawRect(position[0].getX(), position[0].getY(), width, height);

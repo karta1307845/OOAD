@@ -30,6 +30,12 @@ public abstract class BasicObject extends ShapeObject {
 		return ports;
 	}
 
+	@Override
+	public boolean isBasicObject() {
+		return true;
+	}
+	
+	@Override
 	public void setName(String name) {
 		this.name = name;
 	}

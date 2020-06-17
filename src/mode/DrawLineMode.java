@@ -5,12 +5,12 @@ import java.awt.event.MouseEvent;
 
 import model.CanvasModel;
 import model.Location;
-import object.BasicObject;
 import object.ConnectionLine;
 import object.Port;
+import object.UML_Object;
 
 public abstract class DrawLineMode extends Mode {
-	protected BasicObject startObj;
+	protected UML_Object startObj;
 	protected ConnectionLine line;
 	protected Port start;
 
@@ -43,7 +43,7 @@ public abstract class DrawLineMode extends Mode {
 	public void mouseReleased(MouseEvent e) {
 		if (startObj != null) {
 			Location point = new Location(e.getX(), e.getY());
-			BasicObject endObj = getClickedBasicObject(e);
+			UML_Object endObj = getClickedBasicObject(e);
 			canvas.removeObject(line);
 			if (endObj != null && !endObj.equals(startObj)) {
 				line = createLine(start, endObj.getMappingPort(point));

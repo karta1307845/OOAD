@@ -6,10 +6,10 @@ import java.awt.event.MouseEvent;
 import model.CanvasModel;
 import model.Location;
 import object.SelectArea;
-import object.ShapeObject;
+import object.UML_Object;
 
 public class SelectMode extends Mode {
-	private ShapeObject selectedObj;
+	private UML_Object selectedObj;
 	private SelectArea selectArea;
 	private Location start;
 	private boolean multiSelect;
@@ -25,7 +25,7 @@ public class SelectMode extends Mode {
 		int y = e.getY();
 		start = new Location(x, y);
 
-		selectedObj = getClickedShapeObject(e);
+		selectedObj = getClickedObject(e);
 		canvas.unSelectAllObjects();
 		if (selectedObj != null) {
 			canvas.selectObject(selectedObj);
@@ -56,7 +56,7 @@ public class SelectMode extends Mode {
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		if(selectArea != null) {
-			selectArea.selectAllObjects(canvas.getSortedObject());
+			selectArea.selectAllObjects(canvas.getSortedObjects());
 			canvas.removeObject(selectArea);
 		}
 		reset();

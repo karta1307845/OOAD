@@ -1,20 +1,15 @@
 package listener;
 
 import java.awt.event.ActionEvent;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.swing.JPanel;
 
-import mode.Mode;
 import object.CompositeObject;
-import object.ConnectionLine;
-import object.ShapeObject;
 import object.UML_Object;
 import view.ToolBar;
 
-public class GroupListener extends MenuItemListener{
-	
+public class GroupListener extends MenuItemListener {
+
 	public GroupListener(JPanel canvas, ToolBar toolbar) {
 		super(canvas, toolbar);
 	}
@@ -25,12 +20,13 @@ public class GroupListener extends MenuItemListener{
 
 		if (mode == 0 && model.countSelectedObjects() > 1) {
 			UML_Object[] selectedObjects = model.getSelectedObjects();
-
+			
 			for (UML_Object i : selectedObjects) {
 				model.removeObject(i);
 			}
 			
-			UML_Object obj = new CompositeObject(selectedObjects);
+			UML_Object obj = new CompositeObject();
+			obj.group(selectedObjects);
 			model.addObject(obj);
 
 			canvas.repaint();

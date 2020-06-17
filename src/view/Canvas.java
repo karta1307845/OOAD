@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Graphics;
 
@@ -16,7 +15,7 @@ public class Canvas extends JPanel {
 	private CanvasModel model;
 	private CanvasListener listener;
 
-	Canvas() throws AWTException {
+	Canvas(){
 		model = CanvasModel.getInstance();
 		listener = new CanvasListener(this);
 		initialize();
@@ -37,7 +36,7 @@ public class Canvas extends JPanel {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		UML_Object[] objects = model.getSortedObject();
+		UML_Object[] objects = model.getSortedObjects();
 		for (UML_Object i : objects) {
 			i.draw(g);
 		}

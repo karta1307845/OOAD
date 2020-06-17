@@ -1,6 +1,5 @@
 package listener;
 
-import java.awt.AWTException;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -13,7 +12,7 @@ public class CanvasListener implements MouseListener, MouseMotionListener {
 	private ToolBarModel model;
 	private Canvas canvas;
 
-	public CanvasListener(Canvas canvas) throws AWTException {
+	public CanvasListener(Canvas canvas) {
 		this.canvas = canvas;
 		this.model = ToolBarModel.getInstance();
 	}
