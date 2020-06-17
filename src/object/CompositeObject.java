@@ -6,10 +6,10 @@ import java.awt.Graphics;
 import model.Location;
 
 public class CompositeObject extends ShapeObject {
-	private ShapeObject[] elements;
+	private UML_Object[] elements;
 	private final int padding = 20;
 
-	public CompositeObject(ShapeObject[] elements) {
+	public CompositeObject(UML_Object[] elements) {
 		this.elements = elements;
 		setSelected(true);
 		calculatePosition();
@@ -26,11 +26,14 @@ public class CompositeObject extends ShapeObject {
 		int maxX = Integer.MIN_VALUE;
 		int maxY = Integer.MIN_VALUE;
 
-		for (ShapeObject i : elements) {
-			int tempMinX = i.position[0].getX();
-			int tempMinY = i.position[0].getY();
-			int tempMaxX = i.position[3].getX();
-			int tempMaxY = i.position[3].getY();
+		for (UML_Object i : elements) {
+			if (i.getPosition() == null) {
+				continue;
+			}
+			int tempMinX = i.getPosition()[0].getX();
+			int tempMinY = i.getPosition()[0].getY();
+			int tempMaxX = i.getPosition()[3].getX();
+			int tempMaxY = i.getPosition()[3].getY();
 
 			minX = Integer.min(minX, tempMinX);
 			minY = Integer.min(minY, tempMinY);
@@ -48,7 +51,7 @@ public class CompositeObject extends ShapeObject {
 	@Override
 	public void setSelected(boolean selected) {
 		super.setSelected(selected);
-		for (ShapeObject i : elements) {
+		for (UML_Object i : elements) {
 			i.setSelected(selected);
 		}
 	}
@@ -56,7 +59,7 @@ public class CompositeObject extends ShapeObject {
 	@Override
 	public void move(int deltaX, int deltaY) {
 		super.move(deltaX, deltaY);
-		for (ShapeObject i : elements) {
+		for (UML_Object i : elements) {
 			i.move(deltaX, deltaY);
 		}
 	}
@@ -65,7 +68,7 @@ public class CompositeObject extends ShapeObject {
 	public void draw(Graphics g) {
 		g.setColor(Color.black);
 		g.drawRect(position[0].getX(), position[0].getY(), width, height);
-		for (ShapeObject i : elements) {
+		for (UML_Object i : elements) {
 			i.draw(g);
 		}
 	}

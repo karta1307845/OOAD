@@ -8,37 +8,38 @@ import java.util.Set;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import model.UML_Editor;
+import mode.Mode;
+import model.CanvasModel;
+import model.ToolBarModel;
 import object.BasicObject;
 import object.CompositeObject;
 import object.ConnectionLine;
 import object.ShapeObject;
 import object.UML_Object;
-import view.MenuBar;
 
 public class MenuBarListener implements ActionListener {
-	private UML_Editor editor;
-	private MenuBar menu;
+	private CanvasModel model;
+	private ToolBarModel toolbarModel;
 	private JPanel canvas;
 
-	public MenuBarListener(UML_Editor editor, MenuBar menu, JPanel canvas) {
-		this.editor = editor;
-		this.menu = menu;
+	public MenuBarListener(JPanel canvas) {
 		this.canvas = canvas;
+		model = CanvasModel.getInstance();
+		toolbarModel = ToolBarModel.getInstance();
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		int mode = editor.getMode();
+		Mode mode = toolbarModel.getMode();
 		String action = e.getActionCommand();
 
-		if (mode == 0 && action.equals("Group") && editor.countSelectedShapeObjects() > 1) {
+		if (mode == 0 && action.equals("Group") && model.countSelectedShapeObjects() > 1) {
 			Set<ConnectionLine> lineSet = new HashSet<ConnectionLine>();
-			ShapeObject[] selectedObjects = editor.getSelectedShapeObjects();
+			ShapeObject[] selectedObjects = model.getSelectedShapeObjects();
 
 			for (UML_Object i : selectedObjects) {
-				editor.removeObject(i);
-				ConnectionLine[] lines = editor.getConnectionLines(i);
+				model.removeObject(i);
+				ConnectionLine[] lines = model.getConnectionLines(i);
 				for (ConnectionLine j : lines) {
 					lineSet.add(j);
 				}
@@ -47,26 +48,26 @@ public class MenuBarListener implements ActionListener {
 			ConnectionLine[] lineAry = new ConnectionLine[lineSet.size()];
 			lineAry = lineSet.toArray(lineAry);
 			UML_Object obj = new CompositeObject(selectedObjects);
-			editor.addObject(obj);
+			model.addObject(obj);
 
 			canvas.repaint();
 		}
 
-		if (action.equals("UnGroup") && editor.countSelectedObjects() == 1) {
-			UML_Object obj = editor.getSelectedObjects()[0];
+		if (action.equals("UnGroup") && model.countSelectedObjects() == 1) {
+			UML_Object obj = model.getSelectedObjects()[0];
 			if (obj instanceof CompositeObject) {
 				UML_Object[] elements = ((CompositeObject) obj).getElements();
-				editor.removeObject(obj);
+				model.removeObject(obj);
 
 				for (UML_Object i : elements) {
-					editor.addObject(i);
+					model.addObject(i);
 				}
 				canvas.repaint();
 			}
 		}
 
-		if (action.equals("ChangeName") && editor.countSelectedObjects() == 1) {
-			UML_Object obj = editor.getSelectedObjects()[0];
+		if (action.equals("ChangeName") && model.countSelectedObjects() == 1) {
+			UML_Object obj = model.getSelectedObjects()[0];
 			if (obj instanceof BasicObject) {
 				String input = JOptionPane.showInputDialog("物件的新名稱");
 				if (input != null) {

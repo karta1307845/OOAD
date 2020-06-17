@@ -57,4 +57,8 @@ public class ToolBar extends JPanel {
 		pressedButtonIndex = index;
 		buttonList.get(index).setSelected(true);
 	}
+	
+	public int getPressedButtonIndex() {
+		return pressedButtonIndex;
+	}
 }

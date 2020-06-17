@@ -9,7 +9,6 @@ import javax.swing.JPanel;
 
 import listener.CanvasListener;
 import model.CanvasModel;
-import model.ToolBarModel;
 import object.UML_Object;
 
 public class Canvas extends JPanel {
@@ -19,7 +18,7 @@ public class Canvas extends JPanel {
 
 	Canvas() throws AWTException {
 		model = CanvasModel.getInstance();
-		listener = new CanvasListener(model, this, ToolBarModel.getInstance());
+		listener = new CanvasListener(this);
 		initialize();
 	}
 

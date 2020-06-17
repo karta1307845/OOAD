@@ -20,7 +20,7 @@ public class GUI extends JFrame {
 	public GUI(UML_Editor editor) throws AWTException {
 		toolbar = new ToolBar();
 		canvas = new Canvas();
-		menu = new MenuBar(editor, canvas);
+		menu = new MenuBar(canvas, toolbar);
 
 		initialize();
 	}

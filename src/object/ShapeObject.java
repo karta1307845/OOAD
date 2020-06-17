@@ -19,6 +19,11 @@ public abstract class ShapeObject extends UML_Object {
 	public boolean getSelected() {
 		return selected;
 	}
+	
+	@Override
+	public Location[] getPosition() {
+		return position;
+	}
 
 	@Override
 	public boolean isClicked(Location clickPoint) {

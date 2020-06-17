@@ -6,19 +6,16 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 import mode.Mode;
-import model.CanvasModel;
 import model.ToolBarModel;
 import view.Canvas;
 
 public class CanvasListener implements MouseListener, MouseMotionListener {
-	private CanvasModel model;
+	private ToolBarModel model;
 	private Canvas canvas;
-	private ToolBarModel toolbarModel;
 
-	public CanvasListener(CanvasModel model, Canvas canvas, ToolBarModel toolbarModel) throws AWTException {
+	public CanvasListener(Canvas canvas) throws AWTException {
 		this.canvas = canvas;
-		this.model = model;
-		this.toolbarModel = toolbarModel;
+		this.model = ToolBarModel.getInstance();
 	}
 
 	@Override
@@ -40,7 +37,7 @@ public class CanvasListener implements MouseListener, MouseMotionListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		Mode mode = toolbarModel.getMode();
+		Mode mode = model.getMode();
 		if (mode == null) {
 			return;
 		}
@@ -50,7 +47,7 @@ public class CanvasListener implements MouseListener, MouseMotionListener {
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		Mode mode = toolbarModel.getMode();
+		Mode mode = model.getMode();
 		if (mode == null) {
 			return;
 		}
@@ -60,7 +57,7 @@ public class CanvasListener implements MouseListener, MouseMotionListener {
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		Mode mode = toolbarModel.getMode();
+		Mode mode = model.getMode();
 		if (mode == null) {
 			return;
 		}

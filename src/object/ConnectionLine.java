@@ -21,19 +21,9 @@ public abstract class ConnectionLine extends UML_Object {
 	}
 	
 	@Override
-	public void move(int deltaX, int deltaY) {
-		
-		//moveStart(deltaX, deltaY);
-		//moveEnd(deltaX, deltaY);
+	public void setSelected(boolean selected) {
+		selected = false;
 	}
-
-	/*public void moveStart(int deltaX, int deltaY) {
-		start.move(deltaX, deltaY);
-	}
-
-	public void moveEnd(int deltaX, int deltaY) {
-		end.move(deltaX, deltaY);
-	}*/
 
 	public BasicObject getStartObj() {
 		return start.getParent();
